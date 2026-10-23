@@ -84,7 +84,7 @@ For OpenAI portal upload, use **humanpost-openai-plugin-1.0.2.zip** from the [re
 
 The endpoint is deployed and its browser consent, scope enforcement, refresh and revocation were live-tested using an isolated test company. OpenAI developer identity verification, publisher setup and marketplace review are still required. A prepared package is not an approved listing.
 
-Build both release archives reproducibly with `python3 scripts/build_release.py --output-dir /tmp/humanpost-release`.
+To reproduce a published release, check out its matching Git tag first, then build both archives with `python3 scripts/build_release.py --output-dir /tmp/humanpost-release`. Later documentation commits do not alter previously published archives.
 
 ## Typical workflow
 
