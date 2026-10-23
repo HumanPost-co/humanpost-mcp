@@ -1,0 +1,17 @@
+{
+  "name": "humanpost",
+  "owner": {
+    "name": "HumanPost",
+    "email": "support@humanpost.co"
+  },
+  "plugins": [
+    {
+      "name": "humanpost",
+      "source": "./",
+      "description": "Create social content drafts, queue approved posts, and track publishing with HumanPost."
+    }
+  ],
+  "metadata": {
+    "description": "Official HumanPost publishing workflow and hosted MCP integration."
+  }
+}

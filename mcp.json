@@ -1,0 +1,12 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "humanpost": {
+      "type": "streamable-http",
+      "url": "https://us-central1-clickbaitcarousel.cloudfunctions.net/mcp",
+      "headers": {
+        "Authorization": "Bearer ${HUMANPOST_API_KEY}"
+      }
+    }
+  }
+}

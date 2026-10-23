@@ -1,0 +1,19 @@
+{
+  "name": "humanpost",
+  "version": "1.0.0",
+  "description": "Create social content drafts, queue approved posts, and track publishing with HumanPost.",
+  "author": {
+    "name": "HumanPost",
+    "email": "support@humanpost.co",
+    "url": "https://humanpost.com"
+  },
+  "homepage": "https://humanpost.com/docs/mcp",
+  "repository": "https://github.com/HumanPost-co/humanpost-mcp",
+  "license": "MIT",
+  "keywords": [
+    "humanpost",
+    "humanpost publishing"
+  ],
+  "mcpServers": "./.mcp.json",
+  "skills": "./skills/"
+}

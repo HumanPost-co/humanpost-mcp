@@ -1,0 +1,43 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "humanpost",
+  "version": "1.0.0",
+  "description": "Create social content drafts, queue approved posts, and track publishing with HumanPost.",
+  "author": {
+    "name": "HumanPost",
+    "email": "support@humanpost.co",
+    "url": "https://humanpost.com"
+  },
+  "homepage": "https://humanpost.com/docs/mcp",
+  "repository": "https://github.com/HumanPost-co/humanpost-mcp",
+  "license": "MIT",
+  "keywords": [
+    "humanpost",
+    "humanpost publishing"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "HumanPost",
+        "shortDescription": "Manage social publishing",
+        "longDescription": "Connect AI assistants to your HumanPost workspace to inspect accounts, prepare drafts, queue approved content, and track human posting and analytics. Requires a HumanPost account and a scoped company API key. Writes can consume credits or publish content; only perform them when requested. Remote MCP currently uses API-key authentication; ChatGPT public remote-MCP submission requires additional authentication support.",
+        "developerName": "HumanPost",
+        "category": "Productivity",
+        "capabilities": [
+          "Read",
+          "Write"
+        ],
+        "websiteURL": "https://humanpost.com",
+        "supportURL": "https://github.com/HumanPost-co/humanpost-mcp/issues",
+        "privacyPolicyURL": "https://humanpost.com/privacy-policy",
+        "termsOfServiceURL": "https://humanpost.com/terms-of-service",
+        "composerIcon": "./assets/icon.svg",
+        "logo": "./assets/icon.svg",
+        "defaultPrompt": [
+          "Show my HumanPost social accounts and posting queues.",
+          "Prepare a HumanPost draft for my review."
+        ]
+      }
+    }
+  }
+}

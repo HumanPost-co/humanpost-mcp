@@ -1,0 +1,33 @@
+{
+  "name": "humanpost",
+  "version": "1.0.0",
+  "description": "Create social content drafts, queue approved posts, and track publishing with HumanPost.",
+  "author": {
+    "name": "HumanPost",
+    "email": "support@humanpost.co",
+    "url": "https://humanpost.com"
+  },
+  "homepage": "https://humanpost.com/docs/mcp",
+  "repository": "https://github.com/HumanPost-co/humanpost-mcp",
+  "license": "MIT",
+  "keywords": [
+    "humanpost",
+    "humanpost publishing"
+  ],
+  "logo": "assets/icon.svg",
+  "mcpServers": "./mcp.json",
+  "skills": "./skills/",
+  "variables": {
+    "type": "object",
+    "properties": {
+      "HUMANPOST_API_KEY": {
+        "type": "string",
+        "title": "HumanPost API key",
+        "description": "Company-scoped key from Dashboard > Settings > API & MCP. Start with read-only scopes."
+      }
+    },
+    "required": [
+      "HUMANPOST_API_KEY"
+    ]
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "humanpost",
+  "owner": {
+    "name": "HumanPost"
+  },
+  "plugins": [
+    {
+      "name": "humanpost",
+      "source": "./",
+      "description": "Create social content drafts, queue approved posts, and track publishing with HumanPost."
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+*.zip
+.env
+.env.*
+.mcpregistry_*
+node_modules/
