@@ -4,7 +4,7 @@ import urllib.error
 import urllib.request
 
 request = urllib.request.Request(
-    "https://us-central1-clickbaitcarousel.cloudfunctions.net/mcp",
+    "https://humanpost.com/mcp",
     data=json.dumps({
         "jsonrpc": "2.0", "id": 1, "method": "initialize",
         "params": {"protocolVersion": "2025-11-25", "capabilities": {},

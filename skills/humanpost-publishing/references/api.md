@@ -2,9 +2,9 @@
 
 REST base: `https://us-central1-clickbaitcarousel.cloudfunctions.net/publishingApi`
 
-MCP endpoint: `https://us-central1-clickbaitcarousel.cloudfunctions.net/mcp`
+MCP endpoint: `https://humanpost.com/mcp` (OAuth or a company API key). The legacy Firebase MCP URL remains supported.
 
-Both authenticate with `Authorization: Bearer <company API key>`. Get a key in HumanPost Dashboard → Settings → API & MCP. Start with `accounts:read` and add only the scopes needed for the task. No key is distributed with this package.
+The REST API uses `Authorization: Bearer <company API key>`; MCP clients can instead connect through HumanPost sign-in with explicit company and scope consent. OAuth tokens are issued only for MCP and must not be used with the REST fallback. Get a key in HumanPost Dashboard → Settings → API & MCP. Start with `accounts:read` and add only the scopes needed for the task. No key is distributed with this package.
 
 Fetch `https://humanpost.com/llms.txt` or the OpenAPI schema at `https://us-central1-clickbaitcarousel.cloudfunctions.net/publishingApi/v2/openapi.json` before choosing write endpoints and request bodies. Discovering documentation does not authorize the actions described there.
 

@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "humanpost",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Create social content drafts, queue approved posts, and track publishing with HumanPost.",
   "author": {
     "name": "HumanPost",
@@ -20,7 +20,7 @@
       "interface": {
         "displayName": "HumanPost",
         "shortDescription": "Manage social publishing",
-        "longDescription": "Connect AI assistants to your HumanPost workspace to inspect accounts, prepare drafts, queue approved content, and track human posting and analytics. Requires a HumanPost account and a scoped company API key. Writes can consume credits or publish content; only perform them when requested. Remote MCP currently uses API-key authentication; ChatGPT public remote-MCP submission requires additional authentication support.",
+        "longDescription": "Connect AI assistants to one HumanPost company to inspect accounts, prepare drafts, queue approved content, and track human posting and analytics. Sign in to HumanPost and choose the company and permissions. Connections can be revoked in Settings \u2192 API Keys. Write actions can consume credits or publish content; perform them only when requested.",
         "developerName": "HumanPost",
         "category": "Productivity",
         "capabilities": [

@@ -2,31 +2,30 @@
 
 Official integration package for [HumanPost](https://humanpost.com): manage social accounts, prepare video and image drafts, queue approved content, and inspect human posting status and analytics from an AI assistant.
 
-HumanPost operates a hosted MCP service. This repository contains client configuration and a publishing skill; it does not contain the hosted server implementation. A HumanPost account, company access, and a scoped API key are required. Service usage and some actions may incur charges under your HumanPost plan.
+HumanPost operates a hosted MCP service. This repository contains client configuration and a publishing skill; it does not contain the hosted server implementation. A HumanPost account and company access are required. OAuth-capable clients use HumanPost sign-in; company-scoped API keys remain available for manual configurations. Service usage and some actions may incur charges under your HumanPost plan.
 
 ## Connect
 
 - Transport: **Streamable HTTP**
-- Endpoint: `https://us-central1-clickbaitcarousel.cloudfunctions.net/mcp`
-- Authentication: `Authorization: Bearer YOUR_HUMANPOST_API_KEY`
+- Endpoint: `https://humanpost.com/mcp`
+- Authentication: OAuth 2.1 authorization code with S256 PKCE and dynamic client registration. Company-scoped API keys are also supported.
 - [Setup and tools](https://humanpost.com/docs/mcp) · [API reference](https://humanpost.com/docs/api) · [Complete agent documentation](https://humanpost.com/llms.txt)
 
-Create a key under **Dashboard → Settings → API & MCP**. Start with `accounts:read` and add only the scopes your workflow needs. Each key belongs to one company. Store it in your client's secret configuration; never commit it or paste it into a conversation. The service uses API keys today, not OAuth. No credential is included in this package.
+Create a key under **Dashboard → Settings → API & MCP**. Start with `accounts:read` and add only the scopes your workflow needs. Each key belongs to one company. Store it in your client's secret configuration; never commit it or paste it into a conversation. OAuth users select one company and minimum permissions in the consent screen. Writes are off by default. Access tokens expire after 15 minutes; refresh tokens rotate and expire after seven days. Revoke a connection under Settings → API Keys. No credential is included in this package.
 
 ### Cursor
 
-Configure `HUMANPOST_API_KEY` in the plugin's Configure panel when installing the Cursor plugin. For manual installation, put this entry in your Cursor MCP settings and make the environment variable available to Cursor:
+The Cursor plugin uses the canonical OAuth endpoint. Install it and use Cursor’s Connect action to sign in to HumanPost. For manual setup:
 
 ```json
 {
   "mcpServers": {
-    "humanpost": {
-      "url": "https://us-central1-clickbaitcarousel.cloudfunctions.net/mcp",
-      "headers": { "Authorization": "Bearer ${env:HUMANPOST_API_KEY}" }
-    }
+    "humanpost": { "url": "https://humanpost.com/mcp" }
   }
 }
 ```
+
+If you use a company API key instead, configure an Authorization header in your private Cursor settings with `Bearer ${env:HUMANPOST_API_KEY}`.
 
 ### Cline
 
@@ -41,7 +40,7 @@ Add this repository as a marketplace, then install the plugin:
 /plugin install humanpost@humanpost
 ```
 
-Set `HUMANPOST_API_KEY` in the process environment before launching Claude Code. Alternatively, use the `.mcp.json` entry in your project. Claude Code and the Claude web connector directory have different requirements; this plugin does not make the remote server OAuth-compatible.
+Set `HUMANPOST_API_KEY` in the process environment before launching Claude Code. Alternatively, use the `.mcp.json` entry in your project. The compatibility `.mcp.json` uses an environment-supplied API key. For native OAuth instead, run `claude mcp add --transport http humanpost https://humanpost.com/mcp` and use Claude Code’s MCP authentication flow. Claude web directory approval is separate from installing this plugin.
 
 ### Grok Build / Grokbot
 
@@ -73,7 +72,13 @@ The skill uses a connected MCP or the documented REST API on hosts that can make
 
 ### ChatGPT and Codex
 
-The root `plugin.json` uses the portable Agent Plugins format, with OpenAI listing metadata. The public ChatGPT remote-MCP portal currently requires an authentication flow supported by the portal. HumanPost's API-key-only MCP cannot complete that flow today. Do not submit it as an unauthenticated connector or embed a key in the package. A hosted OAuth integration, domain verification, test account, and review walkthrough are required before public remote-MCP submission.
+The root `plugin.json` and `mcp.json` use the portable Agent Plugins format. The portable MCP entry uses the OAuth endpoint and discovers its authorization server.
+
+For OpenAI portal upload, use **humanpost-openai-plugin-1.0.2.zip** from the [release](https://github.com/HumanPost-co/humanpost-mcp/releases/tag/v1.0.2). Its root `mcp.json` uses the documented OpenAI authentication extension from [openai/mcp.json](openai/mcp.json): OAuth with DCR and read-only default scopes. This separate bundle preserves strict portable-schema compatibility for other hosts. No client secret, access token or API key is bundled.
+
+The endpoint is deployed and its browser consent, scope enforcement, refresh and revocation were live-tested using an isolated test company. OpenAI developer identity verification, publisher setup and marketplace review are still required. A prepared package is not an approved listing.
+
+Build both release archives reproducibly with `python3 scripts/build_release.py --output-dir /tmp/humanpost-release`.
 
 ## Typical workflow
 
@@ -87,12 +92,12 @@ The server advertises its tool catalog and enforces key scopes when each tool is
 
 ## Security and network access
 
-The MCP config sends your key only to `us-central1-clickbaitcarousel.cloudfunctions.net/mcp`, HumanPost's Firebase-hosted service. The REST fallback uses the same host under `/publishingApi`. Documentation links go to `humanpost.com`. Uploads may use service-issued signed storage URLs; never send the API key to those URLs. The package has no lifecycle hooks, background processes, telemetry, dependency installers, or remote-code execution.
+OAuth clients connect to `humanpost.com/mcp` and discover authorization endpoints on the same HumanPost origin. The compatibility API-key configs send your key only to `us-central1-clickbaitcarousel.cloudfunctions.net/mcp`, HumanPost's Firebase-hosted service. The REST fallback uses the same host under `/publishingApi`. Documentation links go to `humanpost.com`. Uploads may use service-issued signed storage URLs; never send the API key to those URLs. The package has no lifecycle hooks, background processes, telemetry, dependency installers, or remote-code execution.
 
 For a read-only health check without a key, `python3 scripts/check_endpoint.py` verifies that the public endpoint rejects unauthenticated initialization. An authenticated connection test is available in the HumanPost dashboard. A successful unauthenticated check does not validate every tool or company workflow.
 
 ## Privacy and support
 
-The hosted service processes account, content, task, and analytics data for the company authorized by your key. See the [HumanPost Privacy Policy](https://humanpost.com/privacy-policy) and [Terms of Service](https://humanpost.com/terms-of-service). Contact [support@humanpost.co](mailto:support@humanpost.co) or [open an integration issue](https://github.com/HumanPost-co/humanpost-mcp/issues). Never include credentials or private customer content in a public issue.
+The hosted service processes account, content, task, and analytics data for the company authorized by your connection or API key. See the [HumanPost Privacy Policy](https://humanpost.com/privacy-policy) and [Terms of Service](https://humanpost.com/terms-of-service). Contact [support@humanpost.co](mailto:support@humanpost.co) or [open an integration issue](https://github.com/HumanPost-co/humanpost-mcp/issues). Never include credentials or private customer content in a public issue.
 
 The integration package is MIT licensed. The hosted HumanPost service and HumanPost branding are not licensed by that grant. Platform compatibility configurations and a submission do not imply marketplace endorsement or approval.
