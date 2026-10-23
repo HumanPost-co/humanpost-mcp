@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "humanpost": {
+      "type": "streamableHttp",
+      "url": "https://us-central1-clickbaitcarousel.cloudfunctions.net/mcp",
+      "headers": {
+        "Authorization": "Bearer YOUR_HUMANPOST_API_KEY"
+      },
+      "disabled": false,
+      "autoApprove": []
+    }
+  }
+}

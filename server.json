@@ -3,7 +3,7 @@
   "name": "io.github.HumanPost-co/humanpost",
   "title": "HumanPost",
   "description": "Create social drafts, queue approved posts, and track human posting and analytics in HumanPost.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "websiteUrl": "https://humanpost.com/docs/mcp",
   "repository": {
     "url": "https://github.com/HumanPost-co/humanpost-mcp",

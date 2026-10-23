@@ -28,6 +28,10 @@ Configure `HUMANPOST_API_KEY` in the plugin's Configure panel when installing th
 }
 ```
 
+### Cline
+
+Merge [config-cline.json](config-cline.json) into Cline's MCP settings. Replace `YOUR_HUMANPOST_API_KEY` in your local settings with your scoped key. Keep that settings file private. The transport value is `streamableHttp`; keep `autoApprove` empty and review tool calls. Cline CLI uses `~/.cline/data/settings/cline_mcp_settings.json` by default and supports `CLINE_MCP_SETTINGS_PATH` for an isolated configuration.
+
 ### Claude Code
 
 Add this repository as a marketplace, then install the plugin:
@@ -79,7 +83,7 @@ The root `plugin.json` uses the portable Agent Plugins format, with OpenAI listi
 4. Queue content only within the user's authorization. Preserve idempotency keys and returned operation IDs on retries.
 5. Inspect the resulting post/task status. Queued and pending-approval states are not confirmed publication.
 
-Tools are filtered by key scopes. Account provisioning, task creation, rendering, posting, schedule changes, and cancellations may cause external effects or consume credits. Do not auto-approve every tool. Availability and schemas come from live tool discovery; see the public documentation for details and limitations.
+The server advertises its tool catalog and enforces key scopes when each tool is called. Discovery alone does not grant permission to invoke a tool. Account provisioning, task creation, rendering, posting, schedule changes, and cancellations may cause external effects or consume credits. Do not auto-approve every tool. Availability and schemas come from live tool discovery; see the public documentation for details and limitations.
 
 ## Security and network access
 
