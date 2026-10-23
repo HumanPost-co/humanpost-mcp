@@ -1,0 +1,27 @@
+name: Publish MCP Registry listing
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - name: Install verified official publisher
+        run: |
+          curl --fail --silent --show-error --location https://github.com/modelcontextprotocol/registry/releases/download/v1.8.2/mcp-publisher_linux_amd64.tar.gz --output publisher.tar.gz
+          echo 'd0554112d8f7affad9a10041776d63129a60b163c05036ae26caf73ecbbd89c8  publisher.tar.gz' | sha256sum --check
+          tar -xzf publisher.tar.gz mcp-publisher
+      - name: Validate listing
+        run: ./mcp-publisher validate server.json
+      - name: Authenticate with GitHub OIDC
+        run: ./mcp-publisher login github-oidc
+      - name: Publish hosted MCP listing
+        run: ./mcp-publisher publish server.json
