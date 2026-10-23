@@ -42,7 +42,7 @@ Add this repository as a marketplace, then install the plugin:
 
 Set `HUMANPOST_API_KEY` in the process environment before launching Claude Code. Alternatively, use the `.mcp.json` entry in your project. The compatibility `.mcp.json` uses an environment-supplied API key. For native OAuth instead, run `claude mcp add --transport http humanpost https://humanpost.com/mcp` and use Claude Code’s MCP authentication flow. Claude web directory approval is separate from installing this plugin.
 
-### Grok Build / Grokbot
+### Grok Build
 
 Grok Build supports Claude-compatible plugins. Add the repository using its plugin marketplace command:
 
@@ -51,6 +51,12 @@ grok plugin marketplace add HumanPost-co/humanpost-mcp
 ```
 
 Install `humanpost` from the Marketplace tab and supply `HUMANPOST_API_KEY` in the client environment. The package includes both `.grok-plugin/plugin.json` and `.claude-plugin/plugin.json`. Review the configured MCP before enabling it. Official marketplace inclusion is separate from adding this publisher's marketplace.
+
+### Grok Bot
+
+Grok Bot has a separate [app-directory submission form](https://x.ai/bot/marketplace/submit-a-plugin), which also covers Cursor. The Grok Build CLI instructions above apply to Build; they do not install the Bot app plugin. This repository includes the Cursor marketplace manifest and the canonical OAuth MCP entry for app-directory review.
+
+The Bot-specific listing is not yet confirmed. Its submission form requires an actual in-app test. Backend SDK tests and browser OAuth consent checks are recorded separately and do not stand in for that attestation.
 
 ### Muse Code
 
