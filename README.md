@@ -56,7 +56,9 @@ Install `humanpost` from the Marketplace tab and supply `HUMANPOST_API_KEY` in t
 
 Grok Bot has a separate [app-directory submission form](https://x.ai/bot/marketplace/submit-a-plugin), which also covers Cursor. The Grok Build CLI instructions above apply to Build; they do not install the Bot app plugin. This repository includes the Cursor marketplace manifest and the canonical OAuth MCP entry for app-directory review.
 
-The Bot-specific listing is not yet confirmed. Its submission form requires an actual in-app test. Backend SDK tests and browser OAuth consent checks are recorded separately and do not stand in for that attestation.
+Ask your Bot to add a custom MCP server called HumanPost at `https://humanpost.com/mcp`, then use its Authorize card. In HumanPost, choose one company and the minimum scopes needed; writes are off by default. Start with `accounts:read`. Grok Bot connections are account-level, so revoke a test connection in HumanPost Settings → API Keys and remove the temporary connector when finished.
+
+Marketplace approval is separate from adding a private custom connection. The Grok Bot-specific application remains pending; no approved Bot listing is claimed.
 
 ### Muse Code
 
