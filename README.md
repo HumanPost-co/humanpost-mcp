@@ -82,9 +82,9 @@ The skill uses a connected MCP or the documented REST API on hosts that can make
 
 The root `plugin.json` and `mcp.json` use the portable Agent Plugins format. The portable MCP entry uses the OAuth endpoint and discovers its authorization server.
 
-For OpenAI portal upload, use **humanpost-openai-plugin-1.0.4.zip** from the [release](https://github.com/HumanPost-co/humanpost-mcp/releases/tag/v1.0.4). Its root `mcp.json` uses the documented OpenAI authentication extension from [openai/mcp.json](openai/mcp.json): OAuth with DCR and read-only default scopes. This separate bundle preserves strict portable-schema compatibility for other hosts. No client secret, access token or API key is bundled.
+The latest complete public upload bundle is **humanpost-openai-plugin-1.0.3.zip** from the [1.0.3 release](https://github.com/HumanPost-co/humanpost-mcp/releases/tag/v1.0.3). The 1.0.4 review bundle was provided directly to OpenAI; the [1.0.4 release](https://github.com/HumanPost-co/humanpost-mcp/releases/tag/v1.0.4) publishes only the approved walkthrough. Its root `mcp.json` uses the documented OpenAI authentication extension from [openai/mcp.json](openai/mcp.json): OAuth with DCR and read-only default scopes. This separate bundle preserves strict portable-schema compatibility for other hosts. No client secret, access token or API key is bundled.
 
-The endpoint is deployed and its browser consent, scope enforcement, refresh and revocation were live-tested using an isolated test company. OpenAI developer identity verification, publisher setup and marketplace review are still required. A prepared package is not an approved listing.
+The endpoint is deployed and its browser consent, scope enforcement, refresh and revocation were live-tested using an isolated test company. OpenAI business verification and publisher setup are complete. HumanPost metadata and skills version 1.0.4 was submitted on October 24, 2026, and the portal confirms **In review**. It is not yet an approved or published listing.
 
 To reproduce a published release, check out its matching Git tag first, then build both archives with `python3 scripts/build_release.py --output-dir /tmp/humanpost-release`. Later documentation commits do not alter previously published archives.
 
