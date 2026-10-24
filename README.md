@@ -58,7 +58,7 @@ Grok Bot has a separate [app-directory submission form](https://x.ai/bot/marketp
 
 Ask your Bot to add a custom MCP server called HumanPost at `https://humanpost.com/mcp`, then use its Authorize card. In HumanPost, choose one company and the minimum scopes needed; writes are off by default. Start with `accounts:read`. Grok Bot connections are account-level, so revoke a test connection in HumanPost Settings → API Keys and remove the temporary connector when finished.
 
-Marketplace approval is separate from adding a private custom connection. The Grok Bot-specific application remains pending; no approved Bot listing is claimed.
+Marketplace approval is separate from adding a private custom connection. The Grok Bot-specific application was submitted and acknowledged on October 24, 2026; marketplace review is pending. No approved Bot listing is claimed.
 
 ### Muse Code
 
