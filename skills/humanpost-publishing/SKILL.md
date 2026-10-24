@@ -1,6 +1,6 @@
 ---
 name: humanpost-publishing
-description: Manage HumanPost social accounts, prepare content drafts, queue approved posts, and inspect posting status and analytics using the HumanPost MCP or Publishing API.
+description: Request TikTok and Instagram account setup, prepare video and carousel drafts, queue approved content across multiple accounts, and track human posting and analytics with HumanPost.
 ---
 
 Use this workflow when the user requests work in HumanPost. The service uses human posting workflows; a queued post is not proof of publication.

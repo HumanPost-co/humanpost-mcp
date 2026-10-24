@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "humanpost",
-  "version": "1.0.2",
-  "description": "Create social content drafts, queue approved posts, and track publishing with HumanPost.",
+  "version": "1.0.3",
+  "description": "Request TikTok and Instagram account setup, prepare social content, and coordinate human posting across multiple accounts.",
   "author": {
     "name": "HumanPost",
     "email": "support@humanpost.co",
@@ -13,19 +13,33 @@
   "license": "MIT",
   "keywords": [
     "humanpost",
-    "humanpost publishing"
+    "tiktok",
+    "instagram",
+    "social-media",
+    "account-setup",
+    "account-creation",
+    "content-publishing",
+    "human-posting",
+    "multi-account",
+    "posting-at-scale",
+    "carousels",
+    "reels",
+    "social-analytics"
   ],
   "extensions": {
     "com.openai": {
       "interface": {
         "displayName": "HumanPost",
-        "shortDescription": "Manage social publishing",
-        "longDescription": "Connect AI assistants to one HumanPost company to inspect accounts, prepare drafts, queue approved content, and track human posting and analytics. Sign in to HumanPost and choose the company and permissions. Connections can be revoked in Settings \u2192 API Keys. Write actions can consume credits or publish content; perform them only when requested.",
+        "shortDescription": "TikTok & Instagram at scale",
+        "longDescription": "Set up TikTok and Instagram accounts and get your videos and carousels posted at scale by real people. HumanPost connects ChatGPT to your social publishing workspace so you can request account creation, prepare content, and coordinate human posting across multiple accounts.\n\nUse HumanPost to:\n- Request new TikTok and Instagram account setup with usernames, bios, profile pictures, and warm-up instructions.\n- Upload your existing videos and images in batches, prepare drafts, edit captions and carousel text, and review previews.\n- Queue approved content across your HumanPost accounts and manage posting schedules and release windows.\n- Track publishing progress, find published post links, and compare account and content performance with available analytics.\n\nHumanPost's human operators handle account setup and posting on your behalf. Setup and publication run asynchronously; queued content is not yet published. Bring content you have created or uploaded, then review the accounts, captions, and timing before authorizing publication.\n\nRequires an existing HumanPost account and company access. Sign in securely, select one company, and choose the permissions you want to grant. Account setup, content processing, and posting follow your workspace approvals and usage limits.",
         "developerName": "HumanPost",
         "category": "Productivity",
         "capabilities": [
-          "Read",
-          "Write"
+          "TikTok and Instagram account setup",
+          "Video and carousel drafts",
+          "Posting across multiple accounts",
+          "Posting schedules and status",
+          "Content performance analytics"
         ],
         "websiteURL": "https://humanpost.com",
         "supportURL": "https://github.com/HumanPost-co/humanpost-mcp/issues",
@@ -34,8 +48,9 @@
         "composerIcon": "./assets/icon.svg",
         "logo": "./assets/icon.svg",
         "defaultPrompt": [
-          "Show my HumanPost social accounts and posting queues.",
-          "Prepare a HumanPost draft for my review."
+          "Help me set up TikTok and Instagram accounts for my brand.",
+          "Prepare this video for my TikTok and Instagram accounts. Show me the caption and posting plan before queueing.",
+          "Show which posts are published and compare performance across my accounts."
         ]
       }
     }

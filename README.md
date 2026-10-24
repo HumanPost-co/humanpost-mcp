@@ -1,6 +1,6 @@
 # HumanPost MCP and agent plugins
 
-Official integration package for [HumanPost](https://humanpost.com): manage social accounts, prepare video and image drafts, queue approved content, and inspect human posting status and analytics from an AI assistant.
+Official integration package for [HumanPost](https://humanpost.com): request TikTok and Instagram account setup, prepare video and carousel drafts, and coordinate posting at scale through HumanPost’s human operators. Track account setup, posting progress, published links and performance from your AI assistant.
 
 HumanPost operates a hosted MCP service. This repository contains client configuration and a publishing skill; it does not contain the hosted server implementation. A HumanPost account and company access are required. OAuth-capable clients use HumanPost sign-in; company-scoped API keys remain available for manual configurations. Service usage and some actions may incur charges under your HumanPost plan.
 
@@ -82,7 +82,7 @@ The skill uses a connected MCP or the documented REST API on hosts that can make
 
 The root `plugin.json` and `mcp.json` use the portable Agent Plugins format. The portable MCP entry uses the OAuth endpoint and discovers its authorization server.
 
-For OpenAI portal upload, use **humanpost-openai-plugin-1.0.2.zip** from the [release](https://github.com/HumanPost-co/humanpost-mcp/releases/tag/v1.0.2). Its root `mcp.json` uses the documented OpenAI authentication extension from [openai/mcp.json](openai/mcp.json): OAuth with DCR and read-only default scopes. This separate bundle preserves strict portable-schema compatibility for other hosts. No client secret, access token or API key is bundled.
+For OpenAI portal upload, use **humanpost-openai-plugin-1.0.3.zip** from the [release](https://github.com/HumanPost-co/humanpost-mcp/releases/tag/v1.0.3). Its root `mcp.json` uses the documented OpenAI authentication extension from [openai/mcp.json](openai/mcp.json): OAuth with DCR and read-only default scopes. This separate bundle preserves strict portable-schema compatibility for other hosts. No client secret, access token or API key is bundled.
 
 The endpoint is deployed and its browser consent, scope enforcement, refresh and revocation were live-tested using an isolated test company. OpenAI developer identity verification, publisher setup and marketplace review are still required. A prepared package is not an approved listing.
 
