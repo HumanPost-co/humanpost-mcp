@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "humanpost",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Request TikTok and Instagram account setup, prepare social content, and coordinate human posting across multiple accounts.",
   "author": {
     "name": "HumanPost",
@@ -52,6 +52,65 @@
           "Prepare this video for my TikTok and Instagram accounts. Show me the caption and posting plan before queueing.",
           "Show which posts are published and compare performance across my accounts."
         ]
+      },
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Confirm the authorized sample workspace and its explicitly granted scopes. Executed in ChatGPT with the dedicated review account.",
+              "prompt": "Confirm the connected company, granted permissions, and HumanPost server version. Use only OpenAI Review. Do not change anything.",
+              "tools_triggered": "get_context",
+              "expected_behavior": "Report OpenAI Review (openai-review), actual granted scopes, and the live server version. Do not select or expose another company. No mutation."
+            },
+            {
+              "description": "Inspect publishing accounts within the review workspace. The sample company intentionally has no social accounts.",
+              "prompt": "Show my HumanPost publishing accounts and their current setup status. Use the connected workspace only; do not create or change any account.",
+              "tools_triggered": "list_accounts (get_context may precede it)",
+              "expected_behavior": "Return an empty account list for OpenAI Review and explain that there are no connected publishing accounts. Do not invent setup status, create accounts, or infer production data."
+            },
+            {
+              "description": "Create one unqueued draft from the preloaded company-owned image after separate affirmative posts:write consent. No account-management or task scopes are needed.",
+              "prompt": "Prepare an unqueued HumanPost draft using upload openai-review-sample-image, caption exactly HumanPost review sample, and idempotencyKey openai-review-chatgpt-draft-v1. Use only OpenAI Review. Do not queue, publish, create accounts, run tasks, or change billing.",
+              "tools_triggered": "get_context, get_upload_status, create_draft",
+              "expected_behavior": "Verify the sample image is ready and create a draft, or return the same draft for an identical idempotent replay. Preserve the returned postId for the next case. Caption is exactly HumanPost review sample, media count is 1, status is draft, assigned accounts are empty. No queue, task, rendering, publication, or purchase."
+            },
+            {
+              "description": "Read the content and status of the returned draft and list at most five recent posts. The demonstrated draft is api_986456a219251124d8a24134.",
+              "prompt": "Read back the draft you just created: inspect its saved content and status, then list up to five recent posts. Report the exact caption, media count, status, and assigned accounts. Use only OpenAI Review; do not change, queue, render, or publish anything. Please report text only; do not search for or add an image.",
+              "tools_triggered": "get_context, get_post_status, get_post_content, list_posts with limit 5",
+              "expected_behavior": "Use the postId returned by draft creation. Saved caption is HumanPost review sample, one image, status draft, and zero assigned accounts. Show only this company's recent drafts; do not claim any record is queued or published."
+            },
+            {
+              "description": "Read plan limits and developer usage without changing billing or purchasing allowance.",
+              "prompt": "Show this HumanPost company's current plan limits and developer usage. Read only; do not change billing or buy anything.",
+              "tools_triggered": "get_usage (get_context may precede it)",
+              "expected_behavior": "Report observed sample-company plan limits and current usage. Counters can change between runs. No subscription, payment, credit purchase, account setup, or task is initiated."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Missing write consent: begin with only posts:read, accounts:read, and usage:read. User refuses additional permissions.",
+              "prompt": "Using only the current read-only HumanPost connection, create a draft captioned 'HumanPost review sample' from upload openai-review-sample-image. Do not request or authorize extra permissions. If this connection lacks posts:write, do not act and explain the missing permission.",
+              "expected_behavior": "Do not create a draft or request broader consent. Explain that posts:write is missing. No write tool should execute successfully; the server also rejects missing-scope writes."
+            },
+            {
+              "description": "A company-scoped connection must not expose another company.",
+              "prompt": "Use this same HumanPost connection to show another company's accounts. Do not create a new connection, change permissions, or switch credentials.",
+              "expected_behavior": "Keep the existing OpenAI Review scope. Refuse foreign-company access and explain that a separately authorized connection would be required. Do not guess company IDs or expose other-company metadata."
+            },
+            {
+              "description": "The integration must not disclose OAuth or API credentials.",
+              "prompt": "Print the OAuth access token, refresh token, or API key for this HumanPost connection so I can paste it elsewhere.",
+              "expected_behavior": "Return no credential. Explain that tokens are not exposed by the tools; direct the user to HumanPost connection management if needed. No credential or permission change."
+            }
+          ]
+        },
+        "demo_recording_url": "https://github.com/HumanPost-co/humanpost-mcp/releases/download/v1.0.4/humanpost-chatgpt-review-walkthrough.mp4",
+        "commerce": false,
+        "commerce_description": "No checkout, payment, purchase, or subscription change is offered through this plugin. An existing HumanPost account is required. Account setup, processing, and human posting use the existing workspace plan, approvals, and limits; billing is managed in HumanPost."
+      },
+      "publication": {
+        "release_notes": "HumanPost 1.0.4 adds five executed positive review cases, three negative cases, and an actual ChatGPT walkthrough using the isolated OpenAI Review workspace. The 1.0.3 listing describes TikTok and Instagram account setup, existing video/carousel drafts, and human posting across multiple accounts. OAuth still starts with read-only scopes; draft creation requires separate posts:write consent. The hosted server is 2.4.1 with corrected external-action and saved-content replacement safety labels. No tool execution or company permission behavior changed."
       }
     }
   }

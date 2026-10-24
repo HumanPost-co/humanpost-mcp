@@ -82,7 +82,7 @@ The skill uses a connected MCP or the documented REST API on hosts that can make
 
 The root `plugin.json` and `mcp.json` use the portable Agent Plugins format. The portable MCP entry uses the OAuth endpoint and discovers its authorization server.
 
-For OpenAI portal upload, use **humanpost-openai-plugin-1.0.3.zip** from the [release](https://github.com/HumanPost-co/humanpost-mcp/releases/tag/v1.0.3). Its root `mcp.json` uses the documented OpenAI authentication extension from [openai/mcp.json](openai/mcp.json): OAuth with DCR and read-only default scopes. This separate bundle preserves strict portable-schema compatibility for other hosts. No client secret, access token or API key is bundled.
+For OpenAI portal upload, use **humanpost-openai-plugin-1.0.4.zip** from the [release](https://github.com/HumanPost-co/humanpost-mcp/releases/tag/v1.0.4). Its root `mcp.json` uses the documented OpenAI authentication extension from [openai/mcp.json](openai/mcp.json): OAuth with DCR and read-only default scopes. This separate bundle preserves strict portable-schema compatibility for other hosts. No client secret, access token or API key is bundled.
 
 The endpoint is deployed and its browser consent, scope enforcement, refresh and revocation were live-tested using an isolated test company. OpenAI developer identity verification, publisher setup and marketplace review are still required. A prepared package is not an approved listing.
 
@@ -109,3 +109,9 @@ For a read-only health check without a key, `python3 scripts/check_endpoint.py` 
 The hosted service processes account, content, task, and analytics data for the company authorized by your connection or API key. See the [HumanPost Privacy Policy](https://humanpost.com/privacy-policy) and [Terms of Service](https://humanpost.com/terms-of-service). Contact [support@humanpost.co](mailto:support@humanpost.co) or [open an integration issue](https://github.com/HumanPost-co/humanpost-mcp/issues). Never include credentials or private customer content in a public issue.
 
 The integration package is MIT licensed. The hosted HumanPost service and HumanPost branding are not licensed by that grant. Platform compatibility configurations and a submission do not imply marketplace endorsement or approval.
+
+## OpenAI review materials
+
+The 1.0.4 manifest includes five positive cases, three negative cases, release notes, and a link to an edited screen recording of the actual ChatGPT tests. The video contains sample-company data only; credential entry and unrelated account information are excluded. Idle time is shortened. Read/refusal cases were run with a read-only connection; draft creation was run after separate write consent. Both test grants were revoked and disconnected.
+
+These cases exercise the hosted MCP through private ChatGPT test connectors. Publisher package and skill checks are separate; they do not imply that every advertised workflow (account setup, queueing, live social publication, or tasks) was executed. Reviewer login details are supplied only through OpenAI's private review form and are never bundled here.
